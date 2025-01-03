@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bone Fracture Detection</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            padding-top: 50px;
+            /* Adjust padding to account for fixed nav bar */
+        }
+
+        #uploadContainer {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #004aad;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        p.description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px dashed #004aad;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #f9f9ff;
+            color: #004aad;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #004aad;
+            color: white;
+        }
+
+        button {
+            background-color: #004aad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00307f;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .image-container img {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        #progressBarContainer {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            display: none;
+        }
+
+        #progressBar {
+            height: 20px;
+            background-color: #004aad;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        nav {
+            background-color: #004aad;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tablet-specific styling */
+        @media (min-width: 768px) {
+            .image-container img {
+                width: 45%;
+            }
+        }
+
+        /* Desktop-specific styling */
+        @media (min-width: 1024px) {
+            body {
+                background: linear-gradient(to bottom right, #e6f3ff, #f4f4f9);
+            }
+
+            #uploadContainer {
+                padding: 30px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .custom-file-upload,
+            button {
+                font-size: 1.2rem;
+                padding: 10px 30px;
+            }
+
+            .image-container img {
+                width: 45%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="team.html">Team</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="detect.html">Detect</a>
+    </nav>
+    <div id="uploadContainer">
+        <h1>Bone Fracture Detection</h1>
+        <p class="description">
+            Upload an X-ray image to detect potential bone fractures. The system will analyze your image and display the
+            result.
+        </p>
+        <label for="imageUpload" class="custom-file-upload">Choose Image</label>
+        <input type="file" id="imageUpload" accept="image/*" onchange="previewImage()">
+        <button onclick="uploadImage()">Analyze Image</button>
+        <div class="image-container" id="imageContainer"></div>
+        <div id="result"></div>
+        <div id="loadingSpinner" style="display: none;">Analyzing...</div>
+        <div id="progressBarContainer">
+            <div id="progressBar"></div>
+        </div>
+    </div>
+    <script>
+        function previewImage() {
+            const input = document.getElementById('imageUpload');
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '';
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Uploaded Image';
+                    imageContainer.appendChild(img);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        async function uploadImage() {
+            const input = document.getElementById('imageUpload');
+            const imageContainer = document.getElementById('imageContainer');
+            const result = document.getElementById('result');
+            const progressBarContainer = document.getElementById('progressBarContainer');
+            const progressBar = document.getElementById('progressBar');
+
+            if (!input.files.length) {
+                result.textContent = 'Please upload an image first.';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', input.files[0]);
+
+            result.innerHTML = '';
+            progressBarContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+
+            // Simulate intermediate progress
+            setTimeout(() => progressBar.style.width = '25%', 200);
+            setTimeout(() => progressBar.style.width = '50%', 400);
+            setTimeout(() => progressBar.style.width = '75%', 600);
+
+            try {
+                const response = await fetch('http://localhost:8000/detect', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    result.innerText = `Error: ${errorData.detail}`;
+                    console.error('Error response from server:', errorData);
+                    return;
+                }
+
+                const blob = await response.blob();
+                const imageUrl = URL.createObjectURL(blob);
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = 'Detection Result';
+                if (imageContainer.children.length === 2) {
+                    imageContainer.removeChild(imageContainer.lastChild);
+                }
+
+                // Wait for the progress bar to fill completely
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                imageContainer.appendChild(img);
+                result.textContent = 'Analysis complete!';
+            } catch (error) {
+                result.textContent = `Error: ${error.message}`;
+                console.error('Fetch error:', error);
+            } finally {
+                progressBar.style.width = '100%';
+                setTimeout(() => {
+                    progressBarContainer.style.display = 'none';
+                }, 1000);  // Increased timeout for smoother hiding
+            }
+        }
+    </script>
+</body>
+
+</html>

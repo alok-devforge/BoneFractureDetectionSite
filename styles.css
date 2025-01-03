@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+    padding-top: 50px;  /* Adjust padding to account for fixed nav bar */
+}
+
+#result {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px dashed #004aad;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #f9f9ff;
+    color: #004aad;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #004aad;
+    color: white;
+}
+
+button {
+    background-color: #004aad;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #00307f;
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.image-container img {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+#loadingSpinner {
+    display: none;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #004aad;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+#progressBarContainer {
+    display: none;
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    margin: 20px auto;
+    height: 20px;
+}
+
+#progressBar {
+    width: 0%;
+    height: 100%;
+    background-color: #004aad;
+    border-radius: 10px;
+    transition: width 1s ease;  /* Increased duration for smoother animation */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Tablet-specific styling */
+@media (min-width: 768px) {
+    .image-container img {
+        width: 45%;
+    }
+}
+
+/* Desktop-specific styling */
+@media (min-width: 1024px) {
+    body {
+        background: linear-gradient(to bottom right, #e6f3ff, #f4f4f9);
+    }
+
+    #uploadContainer {
+        padding: 30px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .custom-file-upload,
+    button {
+        font-size: 1.2rem;
+        padding: 10px 30px;
+    }
+
+    .image-container img {
+        width: 45%;
+    }
+}
+
+nav {
+    background-color: #004aad;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#homeContainer {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1000px;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.cta-buttons {
+    margin: 30px 0;
+}
+
+.primary-button, .secondary-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.primary-button {
+    background-color: #004aad;
+    color: white;
+}
+
+.secondary-button {
+    border: 2px solid #004aad;
+    color: #004aad;
+}
+
+.features-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background-color: #f9f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}

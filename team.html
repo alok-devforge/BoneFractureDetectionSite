@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            padding-top: 50px;  /* Adjust padding to account for fixed nav bar */
+        }
+
+        #teamContainer {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #004aad;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+        .team-member div {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        nav {
+            background-color: #004aad;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./detect.html">Detect</a>
+        <a href="./features.html">Features</a>
+        <a href="./team.html">Team</a>
+        <a href="./contact.html">Contact Us</a>
+    </nav>
+    <div id="teamContainer">
+        <h1>Our Team</h1>
+        <div class="team-member">
+            <img src="images/member1.jpg" alt="Member 1">
+            <div>
+                <h3>Alok Kumar</h3>
+                <p>Expert in medical imaging and AI technology.</p>
+            </div>
+        </div>
+        <div class="team-member">
+            <img src="images/member2.jpg" alt="Member 2">
+            <div>
+                <h3>Amrit Kumar</h3>
+                <p>Specialist in software development and data analysis.</p>
+            </div>
+        </div>
+        <div class="team-member">
+            <img src="images/member3.jpg" alt="Member 3">
+            <div>
+                <h3>Member 3</h3>
+                <p>Experienced in healthcare solutions and project management.</p>
+            </div>
+        </div>
+        <div class="team-member">
+            <img src="images/member4.jpg" alt="Member 4">
+            <div>
+                <h3>Member 4</h3>
+                <p>Skilled in machine learning and AI model training.</p>
+            </div>
+        </div>
+        <div class="team-member">
+            <img src="images/member5.jpg" alt="Member 5">
+            <div>
+                <h3>Member 5</h3>
+                <p>Expert in user experience and interface design.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

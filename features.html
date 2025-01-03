@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            padding-top: 50px;  /* Adjust padding to account for fixed nav bar */
+        }
+
+        #featuresContainer {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto; /* Center the container */
+            text-align: justify; /* Make paragraphs and lists justified */
+            line-height: 1.6;    /* Improve readability */
+        }
+
+        h1 {
+            color: #004aad;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: justify; /* Adjust to justify paragraphs */
+        }
+
+        nav {
+            background-color: #004aad;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-position: inside; /* Optional for better alignment */
+            text-align: justify; /* Justify list items as well */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./detect.html">Detect</a>
+        <a href="./features.html">Features</a>
+        <a href="./team.html">Team</a>
+        <a href="./contact.html">Contact Us</a>
+    </nav>
+    <div id="featuresContainer">
+        <h1>Features</h1>
+        <p>Our Bone Fracture Detection system offers the following features:</p>
+        <ul>
+            <li>Accurate detection of bone fractures using advanced AI technology.</li>
+            <li>Easy-to-use interface for uploading and analyzing X-ray images.</li>
+            <li>Fast processing and quick results.</li>
+            <li>Detailed analysis and annotated images highlighting detected fractures.</li>
+            <li>Secure and private handling of uploaded images.</li>
+        </ul>
+        <h2>Model Details</h2>
+        <p>We use the YOLOv8 model for detecting bone fractures. YOLO (You Only Look Once) is a state-of-the-art object detection model known for its speed and accuracy. The model has been trained on a large dataset of X-ray images to accurately detect fractures.</p>
+    </div>
+</body>
+
+</html>
