@@ -21,38 +21,138 @@
             padding-top: 50px;  /* Adjust padding to account for fixed nav bar */
         }
 
-        #teamContainer {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            width: 90%;
+        .team-header {
+            text-align: center;
             max-width: 800px;
+            margin: 0 auto 2rem;  /* Reduced from 3rem */
+            padding: 1rem;  /* Added padding control */
         }
 
-        h1 {
-            color: #004aad;
-            font-size: 2rem;
-            margin-bottom: 15px;
-            text-align: center;
+        .team-header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .team-grid {
+            display: grid; /* Changed back to grid from flex */
+            grid-template-columns: repeat(5, 1fr); /* Explicitly show 5 columns */
+            gap: 1rem;
+            padding: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            justify-content: center;
         }
 
         .team-member {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+            width: 100%; /* Use full width of grid cell */
+            min-width: 0; /* Remove min-width constraint */
+            max-width: 100%; /* Allow card to fit grid cell */
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 114, 206, 0.08);
+            transition: all 0.3s ease;
         }
 
-        .team-member img {
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-image {
+            width: 100px; /* Reduced size */
+            height: 100px; /* Reduced size */
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-right: 20px;
+            margin: 1rem auto; /* Reduced margins */
+            overflow: hidden;
+            border: 3px solid var(--primary); /* Reduced border */
+            background: var(--secondary);
+            box-shadow: 0 4px 20px rgba(0, 114, 206, 0.15);
         }
 
-        .team-member div {
-            font-size: 1rem;
-            color: #666;
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 0.75rem; /* Reduced padding */
+        }
+
+        .member-info h3 {
+            color: var(--text);
+            font-size: 1.1rem; /* Reduced font size */
+            margin-bottom: 0.3rem;
+        }
+
+        .member-info p {
+            font-size: 0.75rem; /* Slightly smaller text */
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            /* Add text truncation for long descriptions */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .member-role {
+            color: var(--accent);
+            font-size: 1rem; /* Reduced from 1.1rem */
+            margin: 0.5rem 0; /* Reduced margins */
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            background: var(--secondary);
+            padding: 0.8rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        #teamContainer {
+            max-width: 1200px;
+            margin: 1rem auto;  /* Reduced from 2rem */
+            padding: 1rem 2rem;  /* Adjusted padding */
+        }
+
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr; /* 1 card per row */
+            }
         }
 
         nav {
@@ -88,43 +188,91 @@
         <a href="./contact.html">Contact Us</a>
     </nav>
     <div id="teamContainer">
-        <h1>Our Team</h1>
-        <div class="team-member">
-            <img src="images/member1.jpg" alt="Member 1">
-            <div>
-                <h3>Alok Kumar</h3>
-                <p>Expert in medical imaging and AI technology.</p>
-            </div>
+        <div class="team-header">
+            <h1>Our Team</h1>
+            <p>Meet the dedicated professionals working to revolutionize bone fracture detection through AI technology.</p>
         </div>
-        <div class="team-member">
-            <img src="images/member2.jpg" alt="Member 2">
-            <div>
-                <h3>Amrit Kumar</h3>
-                <p>Specialist in software development and data analysis.</p>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="images/member1.jpg" alt="Alok Kumar">
+                </div>
+                <div class="member-info">
+                    <h3>Alok Kumar</h3>
+                    <div class="member-role">Full Stack Dev</div>
+                    <p>Lead full-stack developer with expertise in MERN stack and healthcare systems integration. Specializes in building scalable web applications.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="team-member">
-            <img src="images/member3.jpg" alt="Member 3">
-            <div>
-                <h3>Member 3</h3>
-                <p>Experienced in healthcare solutions and project management.</p>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="images/member2.jpg" alt="Amrit Kumar">
+                </div>
+                <div class="member-info">
+                    <h3>Amrit Kumar</h3>
+                    <div class="member-role">Technical Lead</div>
+                    <p>Project architect and technical lead overseeing system design and implementation. Expert in AI integration and team management.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="team-member">
-            <img src="images/member4.jpg" alt="Member 4">
-            <div>
-                <h3>Member 4</h3>
-                <p>Skilled in machine learning and AI model training.</p>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="images/member3.jpg" alt="Aashish Kumar">
+                </div>
+                <div class="member-info">
+                    <h3>Aashish Kumar</h3>
+                    <div class="member-role">Python Dev</div>
+                    <p>Backend Python developer specializing in AI model integration, FastAPI development, and machine learning implementations.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="team-member">
-            <img src="images/member5.jpg" alt="Member 5">
-            <div>
-                <h3>Member 5</h3>
-                <p>Expert in user experience and interface design.</p>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="images/member4.jpg" alt="Samridhi Bagchi">
+                </div>
+                <div class="member-info">
+                    <h3>Samridhi Bagchi</h3>
+                    <div class="member-role">Frontend Developer</div>
+                    <p>UI/UX specialist and frontend developer focused on creating intuitive medical interfaces using React and modern web technologies.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="images/member5.jpg" alt="Karan Singh">
+                </div>
+                <div class="member-info">
+                    <h3>Karan Singh</h3>
+                    <div class="member-role">ML Engineer</div>
+                    <p>AI/ML expert specializing in medical image processing, YOLOv8 implementation, and deep learning model optimization.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Add Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 
 </html>
