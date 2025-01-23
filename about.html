@@ -12,37 +12,143 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #f4f4f9 0%, #e6f3ff 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: #333;
-            padding-top: 50px;  /* Adjust padding to account for fixed nav bar */
+            padding-top: 60px;  /* Adjust padding to account for fixed nav bar */
         }
 
         #aboutContainer {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 800px;
-            line-height: 1.6; /* Improve readability */
+            max-width: 1200px;
+            margin: 1rem auto;  /* Reduced from 2rem */
+            padding: 1rem 2rem;  /* Adjusted padding */
         }
 
-        h1 {
-            color: #004aad;
-            font-size: 2rem;
-            margin-bottom: 15px;
+        .about-header {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
             text-align: center;
         }
 
-        p {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 15px;
-            text-align: justify; /* Justify paragraphs */
+        .about-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/pattern.svg') center/cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .about-header h1 {
+            color: var(--primary);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s ease;
+        }
+
+        .about-header h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            margin: 1rem auto;
+            border-radius: 3px;
+        }
+
+        .about-header p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(74, 144, 226, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,74,173,0.12);
+        }
+
+        .about-section:hover::before {
+            transform: scaleX(1);
+        }
+
+        .about-section h2 {
+            color: var(--primary);
+            font-size: var(--font-lg);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .about-section i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .about-section:hover i {
+            transform: rotateY(180deg);
+        }
+
+        .about-section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
 
         nav {
@@ -65,6 +171,43 @@
         nav a:hover {
             text-decoration: underline;
         }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-header {
+                padding: 3rem 1rem;
+            }
+
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                padding: 0 1rem;
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -78,14 +221,31 @@
         <a href="contact.html">Contact Us</a>
     </nav>
     <div id="aboutContainer">
-        <h1>About Us</h1>
-        <p>Welcome to the Bone Fracture Detection system. Our goal is to provide a reliable and efficient way to detect bone fractures using advanced AI technology.</p>
-        <p>We are dedicated to improving healthcare through innovative solutions.</p>
-        <!-- Additional Details -->
-        <p>At Bone Fracture Detection, we strive to bridge the gap between technology and healthcare, ensuring timely and accurate diagnoses for patients worldwide.</p>
-        <p>Our mission is to enhance the capabilities of medical professionals by providing tools that increase the precision and speed of fracture detection, ultimately improving patient outcomes.</p>
-        <p>We are committed to continuous research and development, staying at the forefront of AI advancements to deliver the best possible solutions to the medical community.</p>
+        <div class="about-header">
+            <h1>About Us</h1>
+            <p>Pioneering AI-powered bone fracture detection to revolutionize healthcare diagnostics</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-section">
+                <h2><i class="fas fa-mission"></i>Our Mission</h2>
+                <p>To enhance healthcare through innovative AI solutions, making accurate fracture detection accessible and efficient for medical professionals worldwide.</p>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-vision"></i>Our Vision</h2>
+                <p>To become the global leader in AI-powered medical imaging diagnostics, setting new standards in healthcare technology.</p>
+            </div>
+
+            <div class="about-section">
+                <h2><i class="fas fa-values"></i>Our Values</h2>
+                <p>We are committed to innovation, accuracy, and patient care, continuously improving our technology to serve healthcare better.</p>
+            </div>
+        </div>
     </div>
+
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 
 </html>
