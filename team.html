@@ -13,12 +13,11 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             color: #333;
             padding-top: 50px;  /* Adjust padding to account for fixed nav bar */
+            position: relative;  /* Add this */
+            display: block;      /* Change from flex to block */
         }
 
         .team-header {
@@ -26,6 +25,8 @@
             max-width: 800px;
             margin: 0 auto 2rem;  /* Reduced from 3rem */
             padding: 1rem;  /* Added padding control */
+            opacity: 0;
+            animation: slideDown 1s ease forwards;
         }
 
         .team-header h1 {
@@ -59,6 +60,10 @@
             box-shadow: var(--card-shadow);
             border: 1px solid rgba(0, 114, 206, 0.08);
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: calc(var(--member-index) * 0.2s);
         }
 
         .team-member:hover {
@@ -75,6 +80,12 @@
             border: 3px solid var(--primary); /* Reduced border */
             background: var(--secondary);
             box-shadow: 0 4px 20px rgba(0, 114, 206, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .member-image {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0, 114, 206, 0.2);
         }
 
         .member-image img {
@@ -85,6 +96,12 @@
 
         .member-info {
             padding: 0.75rem; /* Reduced padding */
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover .member-info {
+            transform: translateY(-5px);
         }
 
         .member-info h3 {
@@ -108,6 +125,24 @@
             color: var(--accent);
             font-size: 1rem; /* Reduced from 1.1rem */
             margin: 0.5rem 0; /* Reduced margins */
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .member-role::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .team-member:hover .member-role::after {
+            width: 100%;
         }
 
         .social-links {
@@ -123,18 +158,20 @@
             border-radius: 50%;
             transition: all 0.3s ease;
             color: var(--text-light);
+            transform: translateY(0);
         }
 
         .social-links a:hover {
             background: var(--primary);
             color: var(--white);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.1);
         }
 
         #teamContainer {
             max-width: 1200px;
             margin: 1rem auto;  /* Reduced from 2rem */
             padding: 1rem 2rem;  /* Adjusted padding */
+            padding-bottom: 4rem; /* Add space for footer */
         }
 
         @media (max-width: 1200px) {
@@ -175,6 +212,35 @@
         nav a:hover {
             text-decoration: underline;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            position: relative;  /* Change from default to relative */
+            width: 100%;
+            bottom: 0;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 
@@ -201,10 +267,10 @@
                 <div class="member-info">
                     <h3>Alok Kumar</h3>
                     <div class="member-role">Full Stack Dev</div>
-                    <p>Lead full-stack developer with expertise in MERN stack and healthcare systems integration. Specializes in building scalable web applications.</p>
+                    <p>Lead developer specializing in AI integration and full-stack development with expertise in modern web technologies.</p>
                     <div class="social-links">
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/alok-kumar-34874a28a/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/alok-devforge" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -218,8 +284,8 @@
                     <div class="member-role">Technical Lead</div>
                     <p>Project architect and technical lead overseeing system design and implementation. Expert in AI integration and team management.</p>
                     <div class="social-links">
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -233,8 +299,8 @@
                     <div class="member-role">Python Dev</div>
                     <p>Backend Python developer specializing in AI model integration, FastAPI development, and machine learning implementations.</p>
                     <div class="social-links">
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -248,8 +314,8 @@
                     <div class="member-role">Frontend Developer</div>
                     <p>UI/UX specialist and frontend developer focused on creating intuitive medical interfaces using React and modern web technologies.</p>
                     <div class="social-links">
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/samriddhibagchi" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.github.com/Samriddhi28-17" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -263,8 +329,8 @@
                     <div class="member-role">ML Engineer</div>
                     <p>AI/ML expert specializing in medical image processing, YOLOv8 implementation, and deep learning model optimization.</p>
                     <div class="social-links">
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -273,6 +339,32 @@
 
     <!-- Add Font Awesome for social icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</body>
 
+    <script>
+        // Add this script at the end of the body
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set member index for staggered animation
+            document.querySelectorAll('.team-member').forEach((member, index) => {
+                member.style.setProperty('--member-index', index);
+            });
+
+            // Add intersection observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.5s ease forwards';
+                        entry.target.style.animationDelay = `${entry.target.style.getPropertyValue('--member-index') * 0.2}s`;
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.team-member').forEach(member => {
+                observer.observe(member);
+            });
+        });
+    </script>
+    <div class="footer">
+        <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
+    </div>
+</body>
 </html>

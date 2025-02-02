@@ -101,7 +101,9 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;  /* Add this */
+            justify-content: center;  /* Add this */
+            text-align: center;
             animation: fadeIn 0.5s ease;
         }
 
@@ -134,7 +136,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem;  /* Update margin */
             font-size: 1.8rem;
             color: white;
             transition: all 0.3s ease;
@@ -142,6 +144,19 @@
 
         .feature-card:hover .feature-icon {
             transform: rotateY(180deg);
+        }
+
+        .feature-card h3 {
+            width: 100%;  /* Add this */
+            text-align: center;  /* Add this */
+            margin-bottom: 1rem;  /* Add this */
+            color: var(--primary);  /* Optional: for consistency */
+        }
+
+        .feature-card p {
+            width: 100%;  /* Add this */
+            text-align: center;  /* Add this */
+            color: var(--text-light);  /* Optional: for better readability */
         }
 
         .tech-showcase {
@@ -317,6 +332,8 @@
             observer.observe(card);
         });
     </script>
+    <div class="footer">
+        <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
+    </div>
 </body>
-
 </html>

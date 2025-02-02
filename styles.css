@@ -301,6 +301,10 @@ nav a:hover {
   transition: all 0.3s ease;
   padding: 20px;
   text-align: center;
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 .feature-card h3 {
@@ -444,4 +448,34 @@ html {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: var(--card-shadow);
+}
+
+/* Add depth to feature cards */
+.feature-card {
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.feature-icon {
+  transform: translateZ(50px);
+  box-shadow: 0 0 30px rgba(74, 144, 226, 0.2);
+}
+
+.footer {
+    background: var(--primary-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }

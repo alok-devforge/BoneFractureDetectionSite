@@ -13,18 +13,18 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #f4f4f9 0%, #e6f3ff 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             color: #333;
             padding-top: 60px;  /* Adjust padding to account for fixed nav bar */
+            position: relative;  /* Add this */
+            display: block;      /* Change from flex to block */
         }
 
         #aboutContainer {
             max-width: 1200px;
             margin: 1rem auto;  /* Reduced from 2rem */
             padding: 1rem 2rem;  /* Adjusted padding */
+            padding-bottom: 4rem; /* Add space for footer */
         }
 
         .about-header {
@@ -208,6 +208,97 @@
                 gap: 1.5rem;
             }
         }
+
+        .reference-section {
+            margin-top: 4rem;
+            text-align: center;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .reference-section h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .reference-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .reference-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(74, 144, 226, 0.08);
+        }
+
+        .reference-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,74,173,0.12);
+        }
+
+        .reference-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .reference-card i {
+            font-size: 1.8rem;
+        }
+
+        .reference-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .reference-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .reference-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,74,173,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .reference-cards {
+                gap: 1rem;
+            }
+            
+            .reference-card {
+                padding: 1.5rem;
+            }
+            
+            .reference-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .footer {
+            position: relative;  /* Change from default to relative */
+            width: 100%;
+            bottom: 0;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 
@@ -242,10 +333,36 @@
                 <p>We are committed to innovation, accuracy, and patient care, continuously improving our technology to serve healthcare better.</p>
             </div>
         </div>
+
+        <div class="reference-section">
+            <h2>Important References</h2>
+            <div class="reference-cards">
+                <div class="reference-card">
+                    <h3><i class="fab fa-github"></i> Project Repository</h3>
+                    <p>Access our complete source code and contribute to the project.</p>
+                    <a href="https://github.com/alok-devforge/BoneFractureDetectionSite" target="_blank" rel="noopener noreferrer" class="reference-link">Visit GitHub Repository</a>
+                </div>
+                
+                <div class="reference-card">
+                    <h3><i class="fas fa-database"></i> Dataset</h3>
+                    <p>MURA Dataset - A Large Dataset of Musculoskeletal Radiographs</p>
+                    <a href="https://stanfordmlgroup.github.io/competitions/mura/" target="_blank" rel="noopener noreferrer" class="reference-link">Access Dataset</a>
+                </div>
+
+                <div class="reference-card">
+                    <h3><i class="fas fa-book"></i> Research Paper</h3>
+                    <p>Our research methodology and findings.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="reference-link">Read Paper</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</body>
 
+    <div class="footer">
+        <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
+    </div>
+</body>
 </html>

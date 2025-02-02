@@ -19,6 +19,8 @@
             justify-content: center;
             gap: 1rem;
             align-items: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
         }
 
         .image-comparison {
@@ -31,9 +33,8 @@
         .image-container {
             display: flex;
             justify-content: center;
-            gap: 1rem; /* Reduced from 2rem */
-            margin-top: 1rem; /* Reduced from 2rem */
-            padding: 0;
+            gap: 2rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
         }
 
@@ -41,13 +42,18 @@
             flex: 1;
             min-width: 300px;
             max-width: 45%;
-            background: transparent;
-            border-radius: 0;
-            padding: 0;
-            box-shadow: none;
-            transition: all 0.3s ease;
             position: relative;
-            margin-bottom: 1rem; /* Add this to control bottom spacing */
+            margin: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
         }
 
         .image-wrapper:hover {
@@ -63,10 +69,12 @@
             width: 100%;
             height: 400px;
             object-fit: contain;
-            border-radius: 0;
-            background: transparent;
-            padding: 0;
+            border-radius: 8px;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
             transition: all 0.3s ease;
+            opacity: 0;
         }
 
         .image-label {
@@ -150,6 +158,8 @@
             left: 0;
             top: 0;
             scroll-margin-top: 2rem;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
         }
 
         #progressBar {
@@ -194,6 +204,8 @@
             max-width: 600px;
             margin: 0 auto 1rem auto; /* Reduced from 1.5rem */
             padding: 0 1rem;
+            opacity: 0;
+            animation: fadeInDown 1s ease forwards;
         }
 
         .header-section h1 {
@@ -263,6 +275,73 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .custom-file-upload, button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .custom-file-upload:hover, button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+        }
+
+        .image-wrapper.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-wrapper img {
+            transition: transform 0.3s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        #progressBarContainer.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(74, 144, 226, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);
+            }
+        }
     </style>
 </head>
 
@@ -309,28 +388,39 @@
         function previewImage() {
             const input = document.getElementById('imageUpload');
             const imageContainer = document.getElementById('imageContainer');
-            imageContainer.innerHTML = '';
+            imageContainer.innerHTML = ''; // Clear existing content
 
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'image-wrapper';
-                    
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.alt = 'Uploaded Image';
-                    
-                    img.onload = () => img.classList.add('loaded');
-                    
-                    const label = document.createElement('div');
-                    label.className = 'image-label';
-                    label.textContent = 'Original Image';
+                
+                // Create and append elements before starting to read the file
+                const wrapper = document.createElement('div');
+                wrapper.className = 'image-wrapper';
+                
+                const img = document.createElement('img');
+                img.alt = 'Original Image';
+                img.style.opacity = '0'; // Start with invisible image
+                
+                const label = document.createElement('div');
+                label.className = 'image-label';
+                label.textContent = 'Original Image';
 
-                    wrapper.appendChild(img);
-                    wrapper.appendChild(label);
-                    imageContainer.appendChild(wrapper);
+                wrapper.appendChild(img);
+                wrapper.appendChild(label);
+                imageContainer.appendChild(wrapper);
+
+                reader.onload = function (e) {
+                    img.src = e.target.result;
+                    // Once image is loaded, fade it in
+                    img.onload = function() {
+                        requestAnimationFrame(() => {
+                            wrapper.style.opacity = '1';
+                            wrapper.style.transform = 'translateY(0)';
+                            img.style.opacity = '1';
+                        });
+                    };
                 };
+
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -356,10 +446,13 @@
 
             progressBarContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
+            // Add animation to progress bar
+            progressBarContainer.classList.add('show');
+
             try {
                 await animateProgress(progressBar, 0, 30);
                 
-                const response = await fetch('http://localhost:8000/detect', {
+                const response = await fetch('https://bfd-backend.onrender.com/detect', {
                     method: 'POST',
                     body: formData
                 });
@@ -404,10 +497,15 @@
                 await new Promise(resolve => setTimeout(resolve, 500));
                 imageContainer.appendChild(wrapper);
 
+                // Add animation for result image
+                requestAnimationFrame(() => {
+                    wrapper.style.opacity = '1';
+                    wrapper.style.transform = 'translateY(0)';
+                });
+
                 await new Promise(resolve => setTimeout(resolve, 300));
                 progressBarContainer.style.opacity = '0';
                 await new Promise(resolve => setTimeout(resolve, 300));
-                progressBarContainer.style.display = 'none';
                 progressBarContainer.style.opacity = '1';
 
                 result.textContent = 'Analysis complete!';
@@ -430,7 +528,20 @@
                 await new Promise(resolve => setTimeout(resolve, stepDuration));
             }
         }
-    </script>
-</body>
 
+        // Add this new function for initial animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadSection = document.querySelector('.upload-section');
+            uploadSection.style.opacity = '0';
+            
+            setTimeout(() => {
+                uploadSection.style.opacity = '1';
+                uploadSection.style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
+    <div class="footer">
+        <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
+    </div>
+</body>
 </html>
