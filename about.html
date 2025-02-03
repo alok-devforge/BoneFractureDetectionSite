@@ -1,368 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <style>
-        /* General styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f4f4f9 0%, #e6f3ff 100%);
-            min-height: 100vh;
-            color: #333;
-            padding-top: 60px;  /* Adjust padding to account for fixed nav bar */
-            position: relative;  /* Add this */
-            display: block;      /* Change from flex to block */
-        }
+      /* General styles */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f4f4f9 0%, #e6f3ff 100%);
+        min-height: 100vh;
+        color: #333;
+        padding-top: 60px; /* Adjust padding to account for fixed nav bar */
+        position: relative; /* Add this */
+        display: block; /* Change from flex to block */
+      }
 
-        #aboutContainer {
-            max-width: 1200px;
-            margin: 1rem auto;  /* Reduced from 2rem */
-            padding: 1rem 2rem;  /* Adjusted padding */
-            padding-bottom: 4rem; /* Add space for footer */
-        }
+      #aboutContainer {
+        max-width: 1200px;
+        margin: 1rem auto; /* Reduced from 2rem */
+        padding: 1rem 2rem; /* Adjusted padding */
+        padding-bottom: 4rem; /* Add space for footer */
+      }
 
+      .about-header {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(255, 255, 255, 0.85) 100%
+        );
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .about-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("images/pattern.svg") center/cover;
+        opacity: 0.05;
+        z-index: 0;
+      }
+
+      .about-header h1 {
+        color: var(--primary);
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+        animation: fadeInDown 1s ease;
+      }
+
+      .about-header h1::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 5px;
+        background: linear-gradient(
+          90deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+        margin: 1rem auto;
+        border-radius: 3px;
+      }
+
+      .about-header p {
+        font-size: 1.25rem;
+        color: var(--text-light);
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease 0.2s;
+        animation-fill-mode: both;
+      }
+
+      .about-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease 0.4s forwards;
+      }
+
+      .about-section {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(74, 144, 226, 0.08);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        transform-origin: left;
+      }
+
+      .about-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 74, 173, 0.12);
+      }
+
+      .about-section:hover::before {
+        transform: scaleX(1);
+      }
+
+      .about-section h2 {
+        color: var(--primary);
+        font-size: var(--font-lg);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .about-section i {
+        font-size: 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s ease;
+      }
+
+      .about-section:hover i {
+        transform: rotateY(180deg);
+      }
+
+      .about-section p {
+        color: var(--text-light);
+        line-height: 1.8;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      nav {
+        background-color: #004aad;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
         .about-header {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
-            padding: 4rem 2rem;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .about-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('images/pattern.svg') center/cover;
-            opacity: 0.05;
-            z-index: 0;
+          padding: 3rem 1rem;
         }
 
         .about-header h1 {
-            color: var(--primary);
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 1s ease;
-        }
-
-        .about-header h1::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-            margin: 1rem auto;
-            border-radius: 3px;
-        }
-
-        .about-header p {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease 0.2s;
-            animation-fill-mode: both;
+          font-size: 2.5rem;
         }
 
         .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease 0.4s forwards;
+          padding: 0 1rem;
+          gap: 1.5rem;
         }
+      }
 
-        .about-section {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(74, 144, 226, 0.08);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+      .reference-section {
+        margin-top: 4rem;
+        text-align: center;
+        animation: fadeInUp 1s ease 0.6s forwards;
+        opacity: 0;
+      }
 
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            transform-origin: left;
-        }
+      .reference-section h2 {
+        color: var(--primary);
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
 
-        .about-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,74,173,0.12);
-        }
+      .reference-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+      }
 
-        .about-section:hover::before {
-            transform: scaleX(1);
-        }
+      .reference-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(74, 144, 226, 0.08);
+      }
 
-        .about-section h2 {
-            color: var(--primary);
-            font-size: var(--font-lg);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+      .reference-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 74, 173, 0.12);
+      }
 
-        .about-section i {
-            font-size: 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: transform 0.3s ease;
-        }
+      .reference-card h3 {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
 
-        .about-section:hover i {
-            transform: rotateY(180deg);
-        }
+      .reference-card i {
+        font-size: 1.8rem;
+      }
 
-        .about-section p {
-            color: var(--text-light);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
+      .reference-card p {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
 
-        nav {
-            background-color: #004aad;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
+      .reference-link {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 1rem;
-        }
+      .reference-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 74, 173, 0.2);
+      }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .about-header {
-                padding: 3rem 1rem;
-            }
-
-            .about-header h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                padding: 0 1rem;
-                gap: 1.5rem;
-            }
-        }
-
-        .reference-section {
-            margin-top: 4rem;
-            text-align: center;
-            animation: fadeInUp 1s ease 0.6s forwards;
-            opacity: 0;
-        }
-
-        .reference-section h2 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
+      @media (max-width: 768px) {
         .reference-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 1rem;
+          gap: 1rem;
         }
 
         .reference-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(74, 144, 226, 0.08);
+          padding: 1.5rem;
         }
 
-        .reference-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,74,173,0.12);
+        .reference-section h2 {
+          font-size: 2rem;
+        }
+      }
+
+      .footer {
+        position: relative; /* Change from default to relative */
+        width: 100%;
+        bottom: 0;
+        margin-top: 2rem;
+      }
+
+      /* Add these styles at the start of your existing styles */
+      .mobile-nav {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1rem;
+        background-color: #004aad;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .site-title {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
         }
 
-        .reference-card h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+        .mobile-nav {
+          display: flex;
         }
 
-        .reference-card i {
-            font-size: 1.8rem;
+        nav {
+          display: none;
+          position: fixed;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          background: #004aad;
+          padding: 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .reference-card p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+        nav.active {
+          display: block;
         }
 
-        .reference-link {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+        nav a {
+          display: block;
+          padding: 1rem;
+          margin: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          text-align: left;
         }
 
-        .reference-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,74,173,0.2);
+        nav a:last-child {
+          border-bottom: none;
         }
-
-        @media (max-width: 768px) {
-            .reference-cards {
-                gap: 1rem;
-            }
-            
-            .reference-card {
-                padding: 1.5rem;
-            }
-            
-            .reference-section h2 {
-                font-size: 2rem;
-            }
-        }
-
-        .footer {
-            position: relative;  /* Change from default to relative */
-            width: 100%;
-            bottom: 0;
-            margin-top: 2rem;
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div class="mobile-nav">
+      <div class="nav-container">
+        <a href="./index.html" class="site-title">Bone Fracture Detection</a>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="detect.html">Detect</a>
-        <a href="features.html">Features</a>
-        <a href="team.html">Team</a>
-        <a href="contact.html">Contact Us</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="detect.html">Detect</a>
+      <a href="features.html">Features</a>
+      <a href="team.html">Team</a>
+      <a href="contact.html">Contact Us</a>
     </nav>
     <div id="aboutContainer">
-        <div class="about-header">
-            <h1>About Us</h1>
-            <p>Pioneering AI-powered bone fracture detection to revolutionize healthcare diagnostics</p>
+      <div class="about-header">
+        <h1>About Us</h1>
+        <p>
+          Pioneering AI-powered bone fracture detection to revolutionize
+          healthcare diagnostics
+        </p>
+      </div>
+
+      <div class="about-content">
+        <div class="about-section">
+          <h2><i class="fas fa-mission"></i>Our Mission</h2>
+          <p>
+            To enhance healthcare through innovative AI solutions, making
+            accurate fracture detection accessible and efficient for medical
+            professionals worldwide.
+          </p>
         </div>
 
-        <div class="about-content">
-            <div class="about-section">
-                <h2><i class="fas fa-mission"></i>Our Mission</h2>
-                <p>To enhance healthcare through innovative AI solutions, making accurate fracture detection accessible and efficient for medical professionals worldwide.</p>
-            </div>
-
-            <div class="about-section">
-                <h2><i class="fas fa-vision"></i>Our Vision</h2>
-                <p>To become the global leader in AI-powered medical imaging diagnostics, setting new standards in healthcare technology.</p>
-            </div>
-
-            <div class="about-section">
-                <h2><i class="fas fa-values"></i>Our Values</h2>
-                <p>We are committed to innovation, accuracy, and patient care, continuously improving our technology to serve healthcare better.</p>
-            </div>
+        <div class="about-section">
+          <h2><i class="fas fa-vision"></i>Our Vision</h2>
+          <p>
+            To become the global leader in AI-powered medical imaging
+            diagnostics, setting new standards in healthcare technology.
+          </p>
         </div>
 
-        <div class="reference-section">
-            <h2>Important References</h2>
-            <div class="reference-cards">
-                <div class="reference-card">
-                    <h3><i class="fab fa-github"></i> Project Repository</h3>
-                    <p>Access our complete source code and contribute to the project.</p>
-                    <a href="https://github.com/alok-devforge/BoneFractureDetectionSite" target="_blank" rel="noopener noreferrer" class="reference-link">Visit GitHub Repository</a>
-                </div>
-                
-                <div class="reference-card">
-                    <h3><i class="fas fa-database"></i> Dataset</h3>
-                    <p>MURA Dataset - A Large Dataset of Musculoskeletal Radiographs</p>
-                    <a href="https://stanfordmlgroup.github.io/competitions/mura/" target="_blank" rel="noopener noreferrer" class="reference-link">Access Dataset</a>
-                </div>
-
-                <div class="reference-card">
-                    <h3><i class="fas fa-book"></i> Research Paper</h3>
-                    <p>Our research methodology and findings.</p>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="reference-link">Read Paper</a>
-                </div>
-            </div>
+        <div class="about-section">
+          <h2><i class="fas fa-values"></i>Our Values</h2>
+          <p>
+            We are committed to innovation, accuracy, and patient care,
+            continuously improving our technology to serve healthcare better.
+          </p>
         </div>
+      </div>
+
+      <div class="reference-section">
+        <h2>Important References</h2>
+        <div class="reference-cards">
+          <div class="reference-card">
+            <h3><i class="fab fa-github"></i> Project Repository</h3>
+            <p>
+              Access our complete source code and contribute to the project.
+            </p>
+            <a
+              href="https://github.com/alok-devforge/BoneFractureDetectionSite"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="reference-link"
+              >Visit GitHub Repository</a
+            >
+          </div>
+
+          <div class="reference-card">
+            <h3><i class="fas fa-database"></i> Dataset</h3>
+            <p>MURA Dataset - A Large Dataset of Musculoskeletal Radiographs</p>
+            <a
+              href="https://stanfordmlgroup.github.io/competitions/mura/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="reference-link"
+              >Access Dataset</a
+            >
+          </div>
+
+          <div class="reference-card">
+            <h3><i class="fas fa-book"></i> Research Paper</h3>
+            <p>Our research methodology and findings.</p>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="reference-link"
+              >Read Paper</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+      const menuIcon = menuToggle.querySelector("i");
 
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+        menuIcon.classList.toggle("fa-bars");
+        menuIcon.classList.toggle("fa-times");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !nav.contains(e.target) &&
+          !menuToggle.contains(e.target) &&
+          nav.classList.contains("active")
+        ) {
+          nav.classList.remove("active");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
+        }
+      });
+
+      // Close menu when clicking a link
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
+        });
+      });
+    </script>
     <!-- Add Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
 
     <div class="footer">
-        <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
+      <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
     </div>
-</body>
+  </body>
 </html>

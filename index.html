@@ -1,602 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bone Fracture Detection - Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <style>
-        body {
-            padding: 60px 0 0 0;
-            background: linear-gradient(135deg, #f4f4f9 0%, #e6f3ff 100%);
-            color: var(--text);
-            min-height: 100vh;
-            margin: 0;
-        }
+      body {
+        padding: 60px 0 0 0;
+        background: linear-gradient(135deg, #f4f4f9 0%, #e6f3ff 100%);
+        color: var(--text);
+        min-height: 100vh;
+        margin: 0;
+      }
 
-        nav {
-            background-color: #004aad;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
+      nav {
+        background-color: #004aad;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 1rem;
-        }
+      nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-size: 1rem;
+      }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+      nav a:hover {
+        text-decoration: underline;
+      }
 
-        .hero-section {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
-            padding: 5rem 2rem;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-        }
+      .hero-section {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(255, 255, 255, 0.85) 100%
+        );
+        padding: 5rem 2rem;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 4rem;
+        animation: fadeIn 1s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 2;
+      }
 
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('images/pattern.svg') center/cover;
-            opacity: 0.05;
-            z-index: 0;
-        }
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("images/pattern.svg") center/cover;
+        opacity: 0.05;
+        z-index: 0;
+      }
 
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+      .hero-section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at 30% 50%,
+          rgba(74, 144, 226, 0.1) 0%,
+          transparent 50%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
 
-        .hero-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
+      .hero-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
 
+      .hero-content h1 {
+        font-size: 4rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        animation: fadeInDown 1s ease;
+      }
+
+      .hero-content h2 {
+        font-size: 2rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s;
+        animation-fill-mode: both;
+      }
+
+      .hero-content p {
+        font-size: 1.25rem;
+        color: var(--text-light);
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        line-height: 1.8;
+        animation: fadeInUp 1s ease 0.4s;
+        animation-fill-mode: both;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin: 3rem 0;
+        animation: fadeInUp 1s ease 0.6s;
+        animation-fill-mode: both;
+      }
+
+      .primary-button,
+      .secondary-button {
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .primary-button {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: var(--white);
+        box-shadow: 0 4px 15px rgba(0, 74, 173, 0.2);
+      }
+
+      .secondary-button {
+        background: var(--white);
+        color: var(--primary);
+        border: 2px solid var(--primary);
+      }
+
+      .primary-button:hover,
+      .secondary-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 74, 173, 0.25);
+      }
+
+      .features-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+        transform-style: preserve-3d;
+        perspective: 1000px;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--card-shadow);
+      }
+
+      .feature-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 2.5rem;
+        color: white;
+        transition: all 0.3s ease;
+        transform: translateZ(30px);
+        transition: transform 0.5s ease;
+      }
+
+      .feature-card:hover .feature-icon {
+        transform: rotateY(180deg);
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
         .hero-content h1 {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            animation: fadeInDown 1s ease;
+          font-size: 2.5rem;
         }
 
         .hero-content h2 {
-            font-size: 2rem;
-            color: var(--text);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s;
-            animation-fill-mode: both;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease 0.4s;
-            animation-fill-mode: both;
+          font-size: 1.5rem;
         }
 
         .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 3rem 0;
-            animation: fadeInUp 1s ease 0.6s;
-            animation-fill-mode: both;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
         }
 
-        .primary-button, .secondary-button {
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .hero-section {
+          padding: 3rem 1rem;
         }
+      }
 
-        .primary-button {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(0,74,173,0.2);
-        }
+      .statistics-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        padding: 5rem 2rem;
+        margin: 4rem 0;
+        color: white;
+      }
 
-        .secondary-button {
-            background: var(--white);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
+      .stat-container {
+        display: flex;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 2rem;
+      }
 
-        .primary-button:hover, .secondary-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,74,173,0.25);
-        }
+      .stat-item {
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
 
-        .features-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+      .stat-number {
+        font-size: 3.5rem;
+        font-weight: bold;
+        display: block;
+        transition: color 0.3s ease;
+      }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
+      .stat-label {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
+      .stat-item:hover {
+        transform: translateY(-5px);
+      }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow);
-        }
+      .stat-item:hover .stat-number {
+        color: var(--accent);
+      }
 
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
+      .how-it-works {
+        padding: 5rem 2rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.5);
+      }
 
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 2.5rem;
-            color: white;
-            transition: all 0.3s ease;
-            transform: translateZ(30px);
-            transition: transform 0.5s ease;
-        }
+      .how-it-works h2 {
+        color: var(--primary);
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
 
-        .feature-card:hover .feature-icon {
-            transform: rotateY(180deg);
-        }
+      .steps-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      .step {
+        padding: 2rem;
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+      }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      .step:hover {
+        transform: translateY(-10px);
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+      .step-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+      }
 
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content h2 {
-                font-size: 1.5rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
-            .hero-section {
-                padding: 3rem 1rem;
-            }
-        }
+      .testimonials {
+        padding: 5rem 2rem;
+        background: var(--surface);
+        text-align: center;
+      }
 
-        .statistics-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            padding: 5rem 2rem;
-            margin: 4rem 0;
-            color: white;
-        }
+      .testimonials h2 {
+        color: var(--primary);
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
 
+      .testimonial-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonial {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+      }
+
+      .quote {
+        font-size: 1.3rem;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+
+      .author {
+        color: var (--primary);
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .role {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
         .stat-container {
-            display: flex;
-            justify-content: space-around;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: bold;
-            display: block;
-            transition: color 0.3s ease;
-        }
-
-        .stat-label {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-item:hover .stat-number {
-            color: var(--accent);
-        }
-
-        .how-it-works {
-            padding: 5rem 2rem;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .how-it-works h2 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .step {
-            padding: 2rem;
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-        }
-
-        .step:hover {
-            transform: translateY(-10px);
-        }
-
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .testimonials {
-            padding: 5rem 2rem;
-            background: var(--surface);
-            text-align: center;
-        }
-
-        .testimonials h2 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
+          flex-direction: column;
+          align-items: center;
         }
 
         .testimonial-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Add these styles at the start of your existing styles */
+      .mobile-nav {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1rem;
+        background-color: #004aad;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .site-title {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
         }
 
-        .testimonial {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
+        .mobile-nav {
+          display: flex;
         }
 
-        .quote {
-            font-size: 1.3rem;
-            color: var(--text);
-            margin-bottom: 1.5rem;
-            font-style: italic;
+        nav {
+          display: none;
+          position: fixed;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          background: #004aad;
+          padding: 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .author {
-            color: var (--primary);
-            font-weight: bold;
-            font-size: 1.1rem;
+        nav.active {
+          display: block;
         }
 
-        .role {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+        nav a {
+          display: block;
+          padding: 1rem;
+          margin: 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          text-align: left;
         }
 
-        @media (max-width: 768px) {
-            .stat-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .testimonial-container {
-                grid-template-columns: 1fr;
-            }
+        nav a:last-child {
+          border-bottom: none;
         }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div class="mobile-nav">
+      <div class="nav-container">
+        <a href="./index.html" class="site-title">Bone Fracture Detection</a>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
     <nav>
-        <a href="./index.html">Home</a>
-        <a href="./about.html">About</a>
-        <a href="./detect.html">Detect</a>
-        <a href="./features.html">Features</a>
-        <a href="./team.html">Team</a>
-        <a href="./contact.html">Contact Us</a>
+      <a href="./index.html">Home</a>
+      <a href="./about.html">About</a>
+      <a href="./detect.html">Detect</a>
+      <a href="./features.html">Features</a>
+      <a href="./team.html">Team</a>
+      <a href="./contact.html">Contact Us</a>
     </nav>
 
     <div class="hero-section">
-        <div class="hero-content">
-            <h1>AI-Powered Bone Fracture Detection</h1>
-            <h2>Revolutionary Healthcare Diagnostics</h2>
-            <p>Experience state-of-the-art fracture detection powered by advanced artificial intelligence, delivering unprecedented accuracy and speed in medical imaging analysis.</p>
-            <div class="cta-buttons">
-                <a href="detect.html" class="primary-button">Start Detection <i class="fas fa-arrow-right"></i></a>
-                <a href="features.html" class="secondary-button">Explore Features</a>
-            </div>
+      <div class="hero-content">
+        <h1>AI-Powered Bone Fracture Detection</h1>
+        <h2>Revolutionary Healthcare Diagnostics</h2>
+        <p>
+          Experience state-of-the-art fracture detection powered by advanced
+          artificial intelligence, delivering unprecedented accuracy and speed
+          in medical imaging analysis.
+        </p>
+        <div class="cta-buttons">
+          <a href="detect.html" class="primary-button"
+            >Start Detection <i class="fas fa-arrow-right"></i
+          ></a>
+          <a href="features.html" class="secondary-button">Explore Features</a>
         </div>
+      </div>
     </div>
 
     <div class="features-preview">
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-bolt"></i>
-            </div>
-            <h3>Lightning Fast</h3>
-            <p>Get results in seconds with our optimized AI processing pipeline</p>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
         </div>
+        <h3>Lightning Fast</h3>
+        <p>Get results in seconds with our optimized AI processing pipeline</p>
+      </div>
 
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>99.8% Accuracy</h3>
-            <p>Industry-leading precision powered by YOLOv8 technology</p>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-chart-line"></i>
         </div>
+        <h3>99.8% Accuracy</h3>
+        <p>Industry-leading precision powered by YOLOv8 technology</p>
+      </div>
 
-        <div class="feature-card">
-            <div class="feature-icon">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Secure & Reliable</h3>
-            <p>Enterprise-grade security with end-to-end encryption</p>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
         </div>
+        <h3>Secure & Reliable</h3>
+        <p>Enterprise-grade security with end-to-end encryption</p>
+      </div>
     </div>
 
     <div class="statistics-section">
-        <div class="stat-container">
-            <div class="stat-item">
-                <span class="stat-number" data-target="10000">0</span>
-                <span class="stat-label">Images Processed</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="99.8">0</span>
-                <span class="stat-label">% Accuracy</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-target="0">0</span>
-                <span class="stat-label">Hospitals Connected</span>
-            </div>
+      <div class="stat-container">
+        <div class="stat-item">
+          <span class="stat-number" data-target="10000">0</span>
+          <span class="stat-label">Images Processed</span>
         </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="99.8">0</span>
+          <span class="stat-label">% Accuracy</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="0">0</span>
+          <span class="stat-label">Hospitals Connected</span>
+        </div>
+      </div>
     </div>
 
     <div class="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-upload"></i>
-                </div>
-                <h3>Upload X-Ray</h3>
-                <p>Upload your X-ray image in common formats like JPG, PNG</p>
-            </div>
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-cogs"></i>
-                </div>
-                <h3>AI Analysis</h3>
-                <p>Our advanced AI model analyzes the image using YOLOv8</p>
-            </div>
-            <div class="step">
-                <div class="step-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h3>Get Results</h3>
-                <p>Receive detailed fracture detection results instantly</p>
-            </div>
+      <h2>How It Works</h2>
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-upload"></i>
+          </div>
+          <h3>Upload X-Ray</h3>
+          <p>Upload your X-ray image in common formats like JPG, PNG</p>
         </div>
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>AI Analysis</h3>
+          <p>Our advanced AI model analyzes the image using YOLOv8</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3>Get Results</h3>
+          <p>Receive detailed fracture detection results instantly</p>
+        </div>
+      </div>
     </div>
 
     <div class="testimonials">
-        <h2>What Medical Professionals Say</h2>
-        <div class="testimonial-container">
-            <div class="testimonial">
-                <div class="quote">"Revolutionary tool for quick diagnosis"</div>
-                <div class="author">Dr. Sarah Johnson</div>
-                <div class="role">Orthopedic Surgeon</div>
-            </div>
-            <div class="testimonial">
-                <div class="quote">"Significantly reduced diagnosis time"</div>
-                <div class="author">Dr. Michael Chen</div>
-                <div class="role">Radiologist</div>
-            </div>
+      <h2>What Medical Professionals Say</h2>
+      <div class="testimonial-container">
+        <div class="testimonial">
+          <div class="quote">"Revolutionary tool for quick diagnosis"</div>
+          <div class="author">Dr. Sarah Johnson</div>
+          <div class="role">Orthopedic Surgeon</div>
         </div>
+        <div class="testimonial">
+          <div class="quote">"Significantly reduced diagnosis time"</div>
+          <div class="author">Dr. Michael Chen</div>
+          <div class="role">Radiologist</div>
+        </div>
+      </div>
     </div>
 
     <script>
-        // Add animation to feature cards on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
+      // Add animation to feature cards on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-        document.querySelectorAll('.feature-card').forEach(card => {
-            observer.observe(card);
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        observer.observe(card);
+      });
+
+      // Track if animation has run
+      let animationHasRun = false;
+
+      // Replace the existing animateNumbers function
+      function animateNumbers() {
+        if (animationHasRun) return;
+
+        const stats = document.querySelectorAll(".stat-number");
+
+        stats.forEach((stat) => {
+          const target = parseFloat(stat.getAttribute("data-target"));
+          const duration = 3000;
+          const framesPerSecond = 60;
+          const totalFrames = (duration * framesPerSecond) / 1000;
+          let frame = 0;
+
+          function updateNumber() {
+            frame++;
+            const progress = frame / totalFrames;
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            const easedValue = easedProgress * target;
+
+            if (Number.isInteger(target)) {
+              stat.textContent = Math.round(easedValue).toLocaleString();
+            } else {
+              stat.textContent = easedValue.toFixed(1);
+            }
+
+            if (frame < totalFrames) {
+              requestAnimationFrame(updateNumber);
+            } else {
+              stat.textContent = target.toString();
+            }
+          }
+
+          requestAnimationFrame(updateNumber);
         });
 
-        // Track if animation has run
-        let animationHasRun = false;
+        animationHasRun = true;
+      }
 
-        // Replace the existing animateNumbers function
-        function animateNumbers() {
-            if (animationHasRun) return;
-            
-            const stats = document.querySelectorAll('.stat-number');
-            
-            stats.forEach(stat => {
-                const target = parseFloat(stat.getAttribute('data-target'));
-                const duration = 3000;
-                const framesPerSecond = 60;
-                const totalFrames = duration * framesPerSecond / 1000;
-                let frame = 0;
-                
-                function updateNumber() {
-                    frame++;
-                    const progress = frame / totalFrames;
-                    const easedProgress = 1 - Math.pow(1 - progress, 3);
-                    const easedValue = easedProgress * target;
+      // Remove the hover effect code for stats
+      document.querySelectorAll(".stat-item").forEach((item) => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(20px)";
+      });
 
-                    if (Number.isInteger(target)) {
-                        stat.textContent = Math.round(easedValue).toLocaleString();
-                    } else {
-                        stat.textContent = easedValue.toFixed(1);
-                    }
+      // Run animation once when stats come into view
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+              if (entry.target.classList.contains("stat-item")) {
+                animateNumbers();
+              }
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-                    if (frame < totalFrames) {
-                        requestAnimationFrame(updateNumber);
-                    } else {
-                        stat.textContent = target.toString();
-                    }
-                }
+      document.querySelectorAll(".stat-item").forEach((item) => {
+        statsObserver.observe(item);
+      });
 
-                requestAnimationFrame(updateNumber);
-            });
+      // Rest of your existing script code for feature cards...
 
-            animationHasRun = true;
+      // Mobile menu toggle
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav");
+      const menuIcon = menuToggle.querySelector("i");
+
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+        menuIcon.classList.toggle("fa-bars");
+        menuIcon.classList.toggle("fa-times");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !nav.contains(e.target) &&
+          !menuToggle.contains(e.target) &&
+          nav.classList.contains("active")
+        ) {
+          nav.classList.remove("active");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
         }
+      });
 
-        // Remove the hover effect code for stats
-        document.querySelectorAll('.stat-item').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
+      // Close menu when clicking a link
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+          menuIcon.classList.remove("fa-times");
+          menuIcon.classList.add("fa-bars");
         });
-
-        // Run animation once when stats come into view
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    if (entry.target.classList.contains('stat-item')) {
-                        animateNumbers();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.stat-item').forEach(item => {
-            statsObserver.observe(item);
-        });
-
-        // Rest of your existing script code for feature cards...
+      });
     </script>
 
     <!-- Add Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
 
     <div class="footer">
-        <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
+      <p>&copy; 2025 Bone Fracture Detection. All rights reserved.</p>
     </div>
-</body>
-
+  </body>
 </html>
